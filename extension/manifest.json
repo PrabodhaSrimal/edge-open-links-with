@@ -2,13 +2,13 @@
   "manifest_version": 3,
   "name": "Open Links With Brave",
   "version": "1.0",
-  "description": "Opens links matching your URL rules in Brave instead of Edge.",
+  "description": "Opens links in Brave unless they match your keep-in-Edge URL rules.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAriVyhwFAGIgcWWadkfqyClpTaZQGYSLksdjSKUoR2Cs828wrph8+m79VdKSgvQYQc1Jbe1VE8AyNCu7k4v0C4iqR6sDWaMR3CJ/eX+0VcXESLJxE/SENRD1tpcJRRtoQCBGQluEFIRksyzyhbnUEbn0K5NAZj4Qyj6clVBMp7c8xoU/hqf8SlYwQu5FOgc+75XGou6gkBkwV7BE24GHdOIA4y0Pif+C7EdKYFVrBfTGeFk+rY6Ci5TJcjxChV8LVIA8WfSkfNOgKnOz7+iufpELcqvufDUv0DG0dd3Lp8EykIQfXIGG//zMoWj1U1RtWFGnBq8u/Lf9gt4tcO1DfcQIDAQAB",
   "permissions": ["nativeMessaging", "storage"],
   "background": { "service_worker": "background.js" },
   "content_scripts": [{
     "matches": ["http://*/*", "https://*/*"],
-    "js": ["glob.js", "content.js"],
+    "js": ["rules.js", "content.js"],
     "all_frames": true,
     "run_at": "document_start"
   }],

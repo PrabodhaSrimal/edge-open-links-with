@@ -1,5 +1,5 @@
-let rules = [];
-const load = () => chrome.storage.sync.get({ rules: '' }, d => { rules = parseRules(d.rules); });
+let keep = [];
+const load = () => chrome.storage.sync.get({ keep: '' }, d => { keep = parseRules(d.keep); });
 load();
 chrome.storage.onChanged.addListener(load);
 
@@ -7,7 +7,7 @@ function onClick(e) {
   // Untrusted = page-scripted clicks, including our own fallback a.click() below.
   if (!e.isTrusted || e.button > 1) return;
   const a = e.composedPath().find(n => n instanceof HTMLAnchorElement && n.href);
-  if (!a || !/^https?:/.test(a.href) || !rules.some(r => r.test(a.href))) return;
+  if (!a || !shouldRedirect(a.href, location.href, keep)) return;
 
   e.preventDefault();
   e.stopImmediatePropagation();
